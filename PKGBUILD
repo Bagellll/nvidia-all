@@ -1918,10 +1918,10 @@ _detect_kernels() {
 # Detect compiler from kernel config and populate BUILD_FLAGS array
 _setup_build_flags() {
   local _kernel="$1"
-  BUILD_FLAGS=() # GCC flags
+  BUILD_FLAGS=(CC=gcc CXX=g++ LD=ld) # GCC flags
 
   if grep -q "CONFIG_CC_IS_CLANG=y" "/usr/lib/modules/$_kernel/build/.config" 2>/dev/null; then
-    BUILD_FLAGS+=(CC=clang LD=ld.lld LLVM=1 LLVM_IAS=1)
+    BUILD_FLAGS+=(CC=clang CXX=clang++ LD=ld.lld LLVM=1 LLVM_IAS=1)
   fi
 }
 
